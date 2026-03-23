@@ -10,7 +10,7 @@
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="BytSpot">
   <link rel="apple-touch-icon" href="icons/logo_dark.png">
 
@@ -22,7 +22,7 @@
 
   <style>
     body {
-      background-color: #000000;
+      background-color: #FFFFFF;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -33,81 +33,66 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, #FF0000 0%, #660000 70%, #000000 100%);
+      background-color: #FFFFFF;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.6s ease-out;
     }
     .logo-container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+      animation: zoomIn 1s cubic-bezier(0.2, 0, 0.2, 1);
     }
     .logo {
-      width: 180px;
-      height: 180px;
-      z-index: 2;
-      filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.25));
-      animation: float 3.5s infinite ease-in-out;
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
     }
-    .logo-glow {
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 1;
-      animation: pulse-glow 3.5s infinite ease-in-out;
+    .loader-wrapper {
+      width: 200px;
+      height: 4px;
+      background-color: #F0F0F0;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 20px;
     }
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      border-left-color: #FFFFFF;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .loader-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #FF0000;
+      border-radius: 2px;
+      animation: progress 3s ease-in-out infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .brand-name {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #FF0000;
+      letter-spacing: 1px;
+      margin-top: 10px;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes progress {
+      0% { width: 0%; margin-left: 0%; }
+      50% { width: 70%; margin-left: 15%; }
+      100% { width: 0%; margin-left: 100%; }
     }
-    @keyframes pulse-glow {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.2); opacity: 0.6; }
-    }
-    .loading-text {
-      color: #FFFFFF;
-      margin-top: 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: 0.8;
-      animation: fade-in-out 2s infinite ease-in-out;
-    }
-    @keyframes fade-in-out {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.9; }
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div id="loading-indicator">
     <div class="logo-container">
-      <div class="logo-glow"></div>
       <img src="icons/logo_dark.png" alt="BytSpot Logo" class="logo">
     </div>
-    <div class="spinner"></div>
-    <div class="loading-text">BytSpot</div>
+    <div class="brand-name">BytSpot</div>
+    <div class="loader-wrapper">
+      <div class="loader-bar"></div>
+    </div>
   </div>
 
   <script src="flutter_bootstrap.js" async></script>
@@ -115,15 +100,14 @@
   <script>
     window.addEventListener('load', function(ev) {
       var loadingIndicator = document.getElementById('loading-indicator');
-      // Hide the loading indicator after a delay to ensure smooth transition
       setTimeout(function() {
         if (loadingIndicator) {
           loadingIndicator.style.opacity = '0';
           setTimeout(function() {
             loadingIndicator.style.display = 'none';
-          }, 800);
+          }, 600);
         }
-      }, 4000);
+      }, 3500);
     });
   </script>
 </body>
