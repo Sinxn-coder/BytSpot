@@ -32,8 +32,84 @@
 
   <title>BytSpot</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #loading-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 0, 0, 0.1);
+      border-left-color: #FF0000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+    .loading-text {
+      color: #FFFFFF;
+      margin-top: 15px;
+      font-family: sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
+  <div id="loading-indicator">
+    <img src="icons/logo_dark.png" alt="BytSpot Logo" class="logo">
+    <div class="spinner"></div>
+    <div class="loading-text">LOADING BYTSPOT...</div>
+  </div>
+
   <script src="flutter_bootstrap.js" async></script>
+  
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Wait for the app to initialize
+      var loadingIndicator = document.getElementById('loading-indicator');
+      
+      // We check for the flutter app element or a reasonable delay
+      // A more robust way is to use the engine initializer but this is a good start
+      setTimeout(function() {
+        if (loadingIndicator) {
+          loadingIndicator.style.opacity = '0';
+          setTimeout(function() {
+            loadingIndicator.style.display = 'none';
+          }, 500);
+        }
+      }, 3500); // Give enough time for the engine to start rendering
+    });
+  </script>
 </body>
 </html>
