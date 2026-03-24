@@ -57210,7 +57210,7 @@ A.br().$1("Web detected: Using Supabase native OAuth for Google Sign-In")
 k=$.be().b
 k===$&&A.a()
 s=7
-return A.h(A.Vf(k.gd8(),B.a1B,"https://sinxn-coder.github.io/BytSpot/"),$async$Ee)
+return A.h(A.Vf(k.gd8(),B.a1B,"https://sinxn-coder.github.io/BytSpot/#/login"),$async$Ee)
 case 7:n=[1]
 s=5
 break
